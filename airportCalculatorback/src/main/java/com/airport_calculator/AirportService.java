@@ -1,4 +1,3 @@
-// src/main/java/com/example/airport_calculator/AirportService.java
 package com.airport_calculator;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +42,12 @@ public class AirportService {
         return airportRepository.findAll().stream()
                 .filter(airport -> airport.getName().toLowerCase().contains(query.toLowerCase()) ||
                         airport.getIataCode().toLowerCase().contains(query.toLowerCase()))
+                .collect(Collectors.toList());
+    }
+
+    public List<Airport> autocompleteAirports(String query) {
+        return airportRepository.findAll().stream()
+                .filter(airport -> airport.getIataCode().toLowerCase().startsWith(query.toLowerCase()))
                 .collect(Collectors.toList());
     }
 

@@ -1,4 +1,3 @@
-// src/main/java/com/example/airport_calculator/AirportController.java
 package com.airport_calculator;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,6 +58,18 @@ public class AirportController {
     @GetMapping("/search")
     public ResponseEntity<List<Airport>> searchAirports(@RequestParam String query) {
         List<Airport> airports = airportService.searchAirports(query);
+        return ResponseEntity.ok(airports);
+    }
+
+    /**
+     * Endpoint for autocomplete search of airports based on a partial query.
+     *
+     * @param query the partial search query
+     * @return a ResponseEntity containing the list of matching airports
+     */
+    @GetMapping("/autocomplete")
+    public ResponseEntity<List<Airport>> autocompleteAirports(@RequestParam String query) {
+        List<Airport> airports = airportService.autocompleteAirports(query);
         return ResponseEntity.ok(airports);
     }
 
