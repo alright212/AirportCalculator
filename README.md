@@ -78,7 +78,7 @@ airport_calculator_front/airport_calc_vue/src/services/api.ts" file:
 ```javascript
 const API_URL = 'http://localhost:8080/api/airports';
 ```
-
+Also changed initial data using python, no need to run that. Filtered invalid data to exclude rows where iata_code is NaN or 'N/A'. The cleaned data is saved to airport_data_updated.csv.
 
 https://github.com/alright212/AirportCalculator/assets/99361502/ee7d1416-afa3-4a74-919e-7adb0361c9c9
 
