@@ -1,11 +1,10 @@
 import pandas as pd
 
 # Load the data with specified column names
-file_path = 'airport_data.csv'  # Adjust the path if necessary
+file_path = 'airport_data.csv'
 column_names = ['iata_code', 'name', 'city', 'country', 'latitude', 'longitude']
 data = pd.read_csv(file_path, names=column_names, header=None)
 
-# Remove the first row if it contains headers
 if data.iloc[0].str.contains('iata_code', case=False).any():
     data = data.iloc[1:]
 
