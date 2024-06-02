@@ -11,12 +11,23 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * REST controller for handling airport-related requests.
+ */
 @RestController
 @RequestMapping("/api/airports")
 public class AirportController {
+
     @Autowired
     private AirportService airportService;
 
+    /**
+     * Endpoint to calculate the distance between two airports.
+     *
+     * @param from the IATA code of the departure airport
+     * @param to   the IATA code of the destination airport
+     * @return a ResponseEntity containing the distance and coordinates of the airports
+     */
     @GetMapping("/distance")
     public ResponseEntity<Map<String, Object>> getDistance(@RequestParam String from, @RequestParam String to) {
         Map<String, Object> response = new HashMap<>();
@@ -39,12 +50,25 @@ public class AirportController {
         }
     }
 
+    /**
+     * Endpoint to search for airports based on a query.
+     *
+     * @param query the search query
+     * @return a ResponseEntity containing the list of matching airports
+     */
     @GetMapping("/search")
     public ResponseEntity<List<Airport>> searchAirports(@RequestParam String query) {
         List<Airport> airports = airportService.searchAirports(query);
         return ResponseEntity.ok(airports);
     }
 
+    /**
+     * Exception handler for AirportNotFoundException.
+     *
+     * @param ex      the exception
+     * @param request the web request
+     * @return a ResponseEntity containing the exception message and a 404 status
+     */
     @ExceptionHandler(AirportNotFoundException.class)
     public ResponseEntity<String> handleAirportNotFoundException(AirportNotFoundException ex, WebRequest request) {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
